@@ -9,3 +9,42 @@ The OJT Timesheet System (often referred to as OJT Timetracker) is a specialized
 + Task Documentation: A mandatory "Accomplishments" field for each entry to provide context for the hours rendered.
 + Dashboard Analytics: Real-time visualization of total hours completed versus the target hours required by the academic curriculum.
 + PDF/CSV Export: Generation of formal weekly or monthly reports ready for submission to educational institutions.
+
+## 📁 Directory and File Structures
+<pre>
+./
+|   📄 README.md
+|
++---📁 classes
+|       🐘 database.class.php
+|
++---📁 dist
+|   |   🐘 index.php
+|   |   🐘 migrations.php
+|   |
+|   +---📁 assets
+|   |       🖼️ omegalogo.png
+|   |
+|   +---📁 css
+|   |      🎨 style.css
+|   |
+|   +---📄 js
+|   |       main.js
+|   |
+|   +---📁 views
+|           🌐 index.html
+|
+\---📁 includes
+        ⚙️ config.php
+        🐘 connection.php
+        🐘 migrate_controller.php
+        🐘 sample_interns.php
+</pre>
+
+* 📂 **classes/** - Source files for all the PHP classes
+* 📂 **dist/** - The document root. The index file is located here.
+* 📂 **dist/assets** - All icons and images will be stored here
+* 📂 **dist/css** - All CSS files
+* 📂 **dist/js** - All Javascript files
+* 📂 **dist/views** - All pages that renders display/views
+* 📄 **README.md** - Project Overview
