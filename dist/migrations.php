@@ -97,6 +97,9 @@ require __DIR__ . '/../includes/migrate_controller.php';
             ?>
             <h3>Creating admin account...</h3>
             <?= $admin_created; ?>
+            <h3>Populating site location data...</h3>
+            <?= $site_created; ?>
+            <h3>Migrating sample intern data into the db...</h3>
             <?= $intern_created; ?>
             <hr>
             <?= $display_total; ?>
