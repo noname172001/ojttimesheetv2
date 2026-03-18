@@ -2,10 +2,10 @@
 
 return [
     'database' => [
-        'db_host' => 'db',
+        'db_host' => 'localhost',
         'db_name' => 'timetrackerdbv2',
         'db_user' => 'root',
-        'db_pass' => 'test1234',
+        'db_pass' => '',
         'charset' => 'utf8mb4',
     ],
     'pdo_options' => [

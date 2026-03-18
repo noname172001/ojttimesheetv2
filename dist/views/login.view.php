@@ -69,7 +69,7 @@
 
 <body onload="clearError();">
     <div style="height: 90vh; display: flex; justify-content: center; align-items:center;">
-        <form action="../includes/login.inc.php" method="post">
+        <form action="includes/login.inc.php" method="post">
             <div id="error_handle" class="error_handle">
                 <?= $test; ?>
             </div>
