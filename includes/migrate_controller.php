@@ -14,6 +14,14 @@ try {
     $mysql_connected = "<p class='error'>Connection to database failed</p>";
 }
 
+// dropping the database @first run
+try {
+    $sqlcommand = "DROP DATABASE IF EXISTS {$db['db_name']};";
+    $pdo->exec($sqlcommand);
+} catch (PDOException $e) {
+    $db_created = "<p class='error'>Database deletion failed!</p>";
+}
+
 // create the database
 try {
     $sqlcommand = "CREATE DATABASE IF NOT EXISTS {$db['db_name']} CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;";
@@ -97,13 +105,12 @@ foreach ($tables as $tablename => $sqlcommand) {
 
 // insert the default admin and populate a sample data.
 $admin = [
-    'firstname' => 'IT',
-    'lastname' => 'Admin',
+    'firstname' => 'it',
+    'lastname' => 'admin',
     'status' => 'active',
     'email' => 'itadmin@omegahms.com',
     'password' => 'admin123',
-    'role' => 'admin',
-    'role_users_id'
+    'role' => 'admin'
 ];
 
 $password_hashed = password_hash($admin['password'], PASSWORD_DEFAULT);
@@ -118,8 +125,8 @@ try {
     $sqlcommand = "INSERT INTO users(`first_name`,`last_name`,`status`) VALUES(:first, :last, :status)";
     $statement = $pdo->prepare($sqlcommand);
     $statement->execute([
-        ':first' => $admin['firstname'],
-        ':last' => $admin['lastname'],
+        ':first' => ucfirst($admin['firstname']),
+        ':last' => ucfirst($admin['lastname']),
         ':status' => $admin['status'],
     ]);
 
@@ -141,3 +148,60 @@ try {
     $pdo->rollBack();
     $admin_created = "<p class='error'>Admin account creation failed!.</p>";
 }
+
+
+// add more sample users
+$sample_intern = require __DIR__ . '/../includes/sample_interns.php';
+
+try {
+    $pdo->beginTransaction();
+
+    $sqlcommand = "INSERT INTO users(`first_name`,`middle_name`,`last_name`,`school`,`total_required_hours`,`site_location`,`user_address`,`mobile_no`,`status`) VALUES(:first, :middle, :last, :school, :total_hrs_required, :site_location, :user_address, :mobile_no, :status);";
+
+    $statement = $pdo->prepare($sqlcommand);
+
+    foreach ($sample_intern as $list_of_intern => $intern) {
+        $statement->execute([
+            ucfirst($intern['firstname']),
+            ucwords($intern['middle_name']),
+            ucfirst($intern['lastname']),
+            ucfirst($intern['school']),
+            $intern['total_hrs_required'],
+            $intern['site_location'],
+            ucfirst($intern['user_address']),
+            $intern['mobile_no'],
+            $intern['status'],
+        ]);
+
+        $new_intern_id = $pdo->lastInsertId();
+        $password_hashed = password_hash($intern['password'], PASSWORD_DEFAULT);
+        $intern['password'] = $password_hashed;
+
+        $sqlcommand_intern_login = "INSERT INTO users_login(`users_id`,`email`,`password`,`role`) VALUES(:users_id, :email, :password, :role);";
+
+        $statement_intern_login = $pdo->prepare($sqlcommand_intern_login);
+        $statement_intern_login->execute([
+            $new_intern_id,
+            $intern['email'],
+            $intern['password'],
+            $intern['role'],
+        ]);
+
+        $intern_created = "<p class='success'>Intern account(s) created successfully !</p>";
+    }
+    $pdo->commit();
+} catch (PDOException $e) {
+    if ($pdo->inTransaction()) {
+        $pdo->rollBack();
+    }
+    $intern_created = "<p class='error'>Intern account creation failed!.</p>" . $e->getMessage();
+}
+
+$sqlcommand = "SELECT COUNT(users_id) AS total_no_of_records FROM users";
+$statement = $pdo->prepare($sqlcommand);
+$statement->execute();
+
+$total_no_of_records = $statement->fetchColumn();
+$display_total = "<p class='success'>Total # of users inserted : <strong>{$total_no_of_records} records</strong>.</p>";
+
+$result_operations = $errors === 0 ? "<p class='success'>Successfully completed all operations.</p>" : "<p class='error'>There are {$errors} operations failed.</p>";

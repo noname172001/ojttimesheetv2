@@ -73,6 +73,10 @@ require __DIR__ . '/../includes/migrate_controller.php';
             border: 10px solid #666;
             width: 100%;
         }
+
+        strong {
+            color: #093509;
+        }
     </style>
 </head>
 
@@ -93,6 +97,11 @@ require __DIR__ . '/../includes/migrate_controller.php';
             ?>
             <h3>Creating admin account...</h3>
             <?= $admin_created; ?>
+            <?= $intern_created; ?>
+            <hr>
+            <?= $display_total; ?>
+            <hr>
+            <?= $result_operations; ?>
         </div>
     </div>
 </body>
