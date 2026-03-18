@@ -1,7 +1,17 @@
 <?php
-include __DIR__ . '/../classes/login.class.php';
-$connection = require __DIR__ . '/../includes/connection.php';
+include '../classes/login.class.php';
+$connection = require __DIR__ . '/connection.php';
 
-$newlogin = new Login($connection);
+// get the post data
+$email = trim($_POST['email']);
+$password = trim($_POST['password']);
 
-return $newlogin;
+/* // input validation and error checking
+if (empty($email) || empty($password)) {
+    header("Location: ../dist/index.php?error=emptyinput");
+    exit();
+}
+ */
+
+$userlogin = new Login($email, $password, $connection);
+$userlogin->loginUser();
