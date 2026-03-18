@@ -6,6 +6,8 @@ $test = loginErrors();
 
 if (!isset($_SESSION['logged_user'])) {
     include __DIR__ . '/views/login.view.php';
+} else {
+    include __DIR__ . '/views/dashboard.view.php';
 }
 
 //use this template to instantiate the user

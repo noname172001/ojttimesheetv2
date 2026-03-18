@@ -7,7 +7,8 @@ function loginErrors()
     $errors = [
         'emptyinput' => 'Please fill up all the required fields.',
         'invalidemail' => 'Please enter a valid email.',
-        'errorlogin' => 'Username or password is incorrect.'
+        'errorlogin' => 'Username or password is incorrect.',
+        'usernotfound' => 'Cannot find the user'
     ];
 
     $query_string = $_SERVER['QUERY_STRING'];
