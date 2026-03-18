@@ -40,11 +40,11 @@ The OJT Timesheet System (often referred to as OJT Timetracker) is a specialized
         🐘 migrate_controller.php
         🐘 sample_interns.php
 </pre>
-
 * 📂 **classes/** - Source files for all the PHP classes
-* 📂 **dist/** - The document root. The index file is located here.
+* 📂 **dist/** - The document root. The index file is located here
 * 📂 **dist/assets** - All icons and images will be stored here
 * 📂 **dist/css** - All CSS files
 * 📂 **dist/js** - All Javascript files
 * 📂 **dist/views** - All pages that renders display/views
+* 📂 **includes/** - Other important PHP include files dependencies
 * 📄 **README.md** - Project Overview
