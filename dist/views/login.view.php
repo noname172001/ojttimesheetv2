@@ -48,7 +48,7 @@
 
         button {
             padding: 5px 30px;
-            margin: 5px 0;
+            margin: 10px 0;
         }
 
         .error_handle {
