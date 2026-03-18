@@ -11,7 +11,7 @@
         }
 
         table {
-            background-color: #1e1e1e;
+            background-color: #0893d3;
             color: #e0e0e0;
             border-collapse: collapse;
             border-radius: 5px;
@@ -31,14 +31,11 @@
             border-bottom: 1px solid #444;
         }
 
-        tr:hover {
-            background-color: #2a2a2a;
-        }
-
         input {
             width: 100%;
             padding: 10px 15px;
             border-radius: 10px;
+            border: 1px solid gray;
         }
 
         input:focus {
@@ -46,18 +43,36 @@
         }
 
         input:hover {
-            border: 2px inset yellow;
+            border: 1px inset yellow;
         }
 
         button {
             padding: 5px 30px;
+            margin: 5px 0;
+        }
+
+        .error_handle {
+            background-color: #f8a6a6;
+            padding: 25px 15px;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            text-align: center;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        label {
+            color: #fff;
         }
     </style>
 </head>
 
 <body onload="clearError();">
-    <center>
+    <div style="height: 90vh; display: flex; justify-content: center; align-items:center;">
         <form action="../includes/login.inc.php" method="post">
+            <div id="error_handle" class="error_handle">
+                <?= $test; ?>
+            </div>
             <table>
                 <tr>
                     <td>
@@ -79,20 +94,17 @@
                 <tr>
                     <td><button type="submit" name="submit">Login</button></td>
                 </tr>
-                <tr>
-                    <td id="error_handle"><?= $test; ?></td>
-                </tr>
+
             </table>
         </form>
-    </center>
-
+    </div>
     <script>
         function clearError() {
             const errorHandler = document.getElementById('error_handle');
 
             setTimeout(() => {
-                errorHandler.innerText = '';
-            }, 10000);
+                errorHandler.style.visibility = 'hidden';
+            }, 8000);
         }
     </script>
 
