@@ -1,5 +1,5 @@
 <?php
-$config = require __DIR__ . './../includes/config.php';
+$config = require 'config.php';
 
 $db = $config['database'];
 

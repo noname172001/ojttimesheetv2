@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../includes/migrate_controller.php';
+include 'includes/migrate_controller.php';
 
 ?>
 <!DOCTYPE html>
